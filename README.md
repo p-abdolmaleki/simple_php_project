@@ -22,6 +22,12 @@
 - **submit_comment.php**: Script for submitting comments.
 - **db.php**: Database connection script.
 - **simple_store.sql**: SQL file for setting up the database.
+- **about.php**: Information page about the store.
+- **contact.php**: Contact page for inquiries.
+- **footer.php**: Script for the website's footer section.
+- **header.php**: Script for the website's header section.
+- **send_message.php**: Script to send user massage to admin.
+
 
 ## Installation
 
