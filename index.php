@@ -3,6 +3,13 @@ session_start();
 include 'db.php';
 
 $result = $conn->query("SELECT * FROM products");
+if (isset($_GET['search'])) {
+    $search = $_GET['search'];
+    $query = "SELECT * FROM products WHERE name LIKE '%$search%'";
+    $result = $conn->query($query);
+} else {
+    $result = $conn->query("SELECT * FROM products");
+}
 ?>
 
 <!DOCTYPE html>
@@ -10,6 +17,10 @@ $result = $conn->query("SELECT * FROM products");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <header>
+    <?php include 'header.php'; ?>
+
+    </header>
     <title>فروشگاه اینترنتی کارگاه ۴</title>
     <style>
         @font-face {
@@ -96,36 +107,57 @@ $result = $conn->query("SELECT * FROM products");
             text-decoration: none;
             margin-left: 10px;
         }
+        header, footer {
+            background-color: #D9D9D9;
+            color: purple;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
     </style>
 </head>
-<body>
-    <h1>محصولات</h1>
-    <?php if (isset($_SESSION['username'])): ?>
-        <p>خوش آمدید، <?= $_SESSION['username']; ?>! <a href="logout.php">خروج</a></p>
-    <?php else: ?>
-        <p><a href="register.php">ثبت نام</a> | <a href="login.php">ورود</a></p>
-    <?php endif; ?>
-    <p><a href="view_cart.php">مشاهده سبد خرید</a></p>
-    <div class="products">
-        <?php while($row = $result->fetch_assoc()): ?>
-            <div class="product">
-                <a href="product_detail.php?id=<?= $row['id']; ?>">
-                    <?php if (!empty($row['image_url'])): ?>
-                        <img src="<?= $row['image_url']; ?>" alt="<?= $row['name']; ?>">
-                    <?php endif; ?>
-                    <h2><?= $row['name']; ?></h2>
-                </a>
-                <p><?= $row['description']; ?></p>
-                <p>قیمت: <?= $row['price']; ?> هزار تومان</p>
-                <p>موجودی: <?= $row['stock']; ?></p>
-                <form method="post" action="cart.php">
-                    <input type="hidden" name="product_id" value="<?= $row['id']; ?>">
-                    <label for="quantity">تعداد:</label>
-                    <input type="number" name="quantity" min="1" max="<?= $row['stock']; ?>" value="1" required>
-                    <button type="submit">اضافه کردن به سبد خرید</button>
-                </form>
-            </div>
-        <?php endwhile; ?>
-    </div>
-</body>
+    <body>
+    <form action="index.php" method="GET">
+        <input type="text" name="search" placeholder="جستجو...">
+        <button type="submit">جستجو</button>
+    </form>
+        <h1>محصولات</h1>
+        <?php if (isset($_SESSION['username'])): ?>
+            <p>خوش آمدید، <?= $_SESSION['username']; ?>! <a href="logout.php">خروج</a></p>
+        <?php else: ?>
+            <p>هنوز وارد حساب کاربری خود نشده‌اید...</p>
+        <?php endif; ?>
+        <div class="products">
+            <?php while($row = $result->fetch_assoc()): ?>
+                <div class="product">
+                    <a href="product_detail.php?id=<?= $row['id']; ?>">
+                        <?php if (!empty($row['image_url'])): ?>
+                            <img src="<?= $row['image_url']; ?>" alt="<?= $row['name']; ?>">
+                        <?php endif; ?>
+                        <h2><?= $row['name']; ?></h2>
+                    </a>
+                    <p><?= $row['description']; ?></p>
+                    <p>قیمت: <?= $row['price']; ?> هزار تومان</p>
+                    <p>موجودی: <?= $row['stock']; ?></p>
+                    <form method="post" action="cart.php">
+                        <input type="hidden" name="product_id" value="<?= $row['id']; ?>">
+                        <label for="quantity">تعداد:</label>
+                        <input type="number" name="quantity" min="1" max="<?= $row['stock']; ?>" value="1" required>
+                        <button type="submit">اضافه کردن به سبد خرید</button>
+                    </form>
+                </div>
+            <?php endwhile; ?>
+        </div>
+    </body>
+    <p>
+
+    
+    </p>
+
+<?php include 'footer.php'; ?>
 </html>

@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ورود</title>
+    <?php include 'header.php'; ?>
     <style>
         @font-face {
             font-family: vazir;
@@ -37,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         body {
             font-family: "Poppins", vazir;
             background-color: #c2f0c2; 
-            color: #4b0082;
+            color: #4b0082; 
             margin: 0;
             padding: 0;
         }
@@ -64,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         input[type="text"],
         input[type="password"] {
             width: 100%;
-            padding: 10px;
+            padding: 10px 0px ;
             margin-bottom: 20px;
             border-radius: 5px;
             border: 1px solid #ccc;
@@ -89,6 +90,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             text-decoration: none;
             margin-left: 10px;
         }
+        header, footer {
+            background-color: #D9D9D9;
+            color: purple;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -103,7 +116,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="password" name="password" required><br>
         <button type="submit">ورود</button>
     </form>
-    <a href="register.php">ثبت نام</a> | <a href="index.php">بازگشت به صفحه اصلی</a>
 </body>
+<p>
+
+
+</p>
+<?php include 'footer.php'; ?>
 </html>
 

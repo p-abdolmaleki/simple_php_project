@@ -23,6 +23,7 @@ if (isset($_GET['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>جزئیات محصول</title>
+    <?php include 'header.php'; ?>
     <style>
         @font-face {
             font-family: vazir;
@@ -35,7 +36,10 @@ if (isset($_GET['id'])) {
         margin: 0;
         padding: 0;
     }
-
+    h1 {
+            text-align: center;
+            color: #4b0082;
+        }
     a {
         color: #800080; 
         text-decoration: none;
@@ -83,7 +87,7 @@ if (isset($_GET['id'])) {
 
         .product-detail .comments h3 {
             color: #4b0082;
-            margin-bottom: 10px;
+            margin: 10px;
         }
 
         .product-detail .comments .comment {
@@ -113,7 +117,7 @@ if (isset($_GET['id'])) {
 
         .product-detail .comments textarea {
             width: 100%;
-            padding: 10px;
+            padding: 10px 0px;
             border: 1px solid #ddd;
             border-radius: 5px;
             resize: none;
@@ -134,15 +138,25 @@ if (isset($_GET['id'])) {
         }
 
         a {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #4b0082;
+            color: #800080; 
             text-decoration: none;
+            margin-left: 10px;
         }
 
         a:hover {
             text-decoration: underline;
+        }
+        header, footer {
+            background-color: #D9D9D9;
+            color: purple;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
         }
     </style>
 </head>
@@ -186,7 +200,6 @@ if (isset($_GET['id'])) {
                         <label for="comment">نظر خود را بنویسید:</label><br>
                         <textarea name="comment" rows="4" required></textarea><br>
                         <button type="submit">ارسال نظر</button>
-                        <a href="index.php">بازگشت به صفحه اصلی</a>
                     </form>
                 <?php else: ?>
                     <p>برای ارسال نظر <a href="login.php">وارد</a> شوید.</p>
@@ -198,4 +211,5 @@ if (isset($_GET['id'])) {
     </div>
     
 </body>
+<?php include 'footer.php'; ?>
 </html>
